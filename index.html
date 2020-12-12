@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="#">
+	<script src="res/angular.min.js"></script>	
+	<script src="res/angular-route.js"></script>	
+	<title>Demo</title>
+	<style>
+		@import 'res/design.css';		
+	</style>	
+</head>
+<body>
+
+<div ng-app="myapp">
+	
+	<div ng-controller="firstCtrl">
+		<h1>{{title}}</h1>
+	</div>
+	
+	<div>
+		<a href="#!first">First</a>		
+		<a href="#!second">Second</a>	
+		<a href="#!third">Third</a>			
+	</div>
+	
+	<div ng-view></div>
+</div>
+
+
+<script>
+	angular
+		.module('myapp', ['ngRoute'])
+		.controller('firstCtrl', first)
+		.controller('secondCtrl', second)
+		.controller('thirdCtrl', third)
+		.config(conf)
+		.service('readEmp', readEmp)
+		
+	function first($scope) {
+		$scope.title="Hello, this is first!"
+	}
+	
+	function second($scope) {
+		$scope.title="Hello, this is second!"
+	}
+	
+	function third($scope) {
+		$scope.title="Hello, this is third!"
+	}
+	
+	function conf($routeProvider) {
+		$routeProvider
+			.when('/first', {
+				templateUrl:'first.html', controller:'firstCtrl'
+			})
+			.when('/second', {
+				templateUrl:'second.html', controller:'secondCtrl'
+			})
+			.when('/third', {
+				templateUrl:'third.html', controller:'thirdCtrl'
+			})
+	}
+	
+	function readEmp($http){
+		
+	}
+</script>
+
+</body>
+</html>
